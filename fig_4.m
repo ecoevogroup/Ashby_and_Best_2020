@@ -1,7 +1,7 @@
 function fig_4
 
 % fig_4
-% Generates Figure 4 from "Ashby & Best (2020) Herd Immunity"
+% Generates Figure 4 from "Ashby & Best (2021) Herd Immunity"
 
 % Setup parameters
 t_max = 365*25; % duration
@@ -26,6 +26,7 @@ set(gcf,'Position',[10 100 xSize*50 ySize*50])
 pos1 = [0.13,0.16,0.3,0.8];
 pos2 = [0.43,0.16,0.5,0.8];
 pos3 = [0.61,0.28,0.3,0.2];
+font = 'helvetica';
 
 % First phase
 axes('position',pos1)
@@ -37,11 +38,14 @@ xlim([0,100])
 set(gca,'xtick',0:20:80)
 ylim([0,1])
 set(gca,'fontsize',10)
-xlabel('Time (days)','interpreter','latex','fontsize',14)
-ylabel('Proportion','interpreter','latex','fontsize',14)
-text(70,HI-0.08,{'herd immunity','threshold'},'interpreter','latex','fontsize',10,'horizontalalignment','center')
-text(35,0.92,'not susceptible','interpreter','latex','fontsize',10)
-text(45,0.2,'infected','interpreter','latex','fontsize',10)
+x1=xlabel('Time (days)','interpreter','tex','fontname',font,'fontsize',14);
+temp=get(x1,'position');
+temp(2)=temp(2)*0.7;
+set(x1,'position',temp);
+ylabel('Proportion','interpreter','tex','fontname',font,'fontsize',14)
+text(70,HI-0.08,{'herd immunity','threshold'},'interpreter','tex','fontname',font,'fontsize',10,'horizontalalignment','center')
+text(35,0.92,'not susceptible','interpreter','tex','fontname',font,'fontsize',10)
+text(45,0.2,'infected','interpreter','tex','fontname',font,'fontsize',10)
 box on
 
 % Second phase
@@ -55,7 +59,10 @@ ylim([0,1])
 set(gca,'ytick',[])
 set(gca,'fontsize',10)
 set(gca,'xtick',0:(365*5):t_max,'xticklabel',(0:(365*5):t_max)/365)
-xlabel('Time (years)','interpreter','latex','fontsize',14)
+x1=xlabel('Time (years)','interpreter','tex','fontname',font,'fontsize',14);
+temp=get(x1,'position');
+temp(2)=temp(2)*0.7;
+set(x1,'position',temp);
 box on
 
 % Inset
@@ -66,8 +73,12 @@ xlim([100,t_max])
 set(gca,'fontsize',8)
 set(gca,'xtick',0:(365*5):t_max,'xticklabel',(0:(365*5):t_max)/365)
 ylim([0,0.04])
-ylabel('Proportion','interpreter','latex','fontsize',8)
-xlabel('Time (years)','interpreter','latex','fontsize',8)
+ylabel('Proportion','interpreter','tex','fontname',font,'fontsize',8)
+x1=xlabel('Time (years)','interpreter','tex','fontname',font,'fontsize',8);
+temp=get(x1,'position');
+temp(2)=temp(2)*0.7;
+set(x1,'position',temp);
+
 
 if(exist('save2pdf.m','file'))
     save2pdf('fig_4.pdf');

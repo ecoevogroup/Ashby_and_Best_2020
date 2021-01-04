@@ -1,7 +1,7 @@
 function fig_1
 
 % fig_1
-% Generates Figure 1 from "Ashby & Best (2020) Herd Immunity"
+% Generates Figure 1 from "Ashby & Best (2021) Herd Immunity"
 
 % Set random number seed
 rng default
@@ -32,8 +32,9 @@ xSize = 16*0.8; ySize = 4.5*0.8;
 xLeft = (21-xSize)/2; yTop = (30-ySize)/2;
 set(gcf,'PaperPosition',[xLeft yTop xSize ySize])
 set(gcf,'Position',[10 100 xSize*50 ySize*50])
-labs = {'(a)','(b)','(c)'};
+labs = {'\bf{A}','\bf{B}','\bf{C}'};
 Col=[77,175,74; 228,26,28; 55,126,184]/255;
+font = 'helvetica';
 
 for i=1:3
     subplot(1,3,i)
@@ -41,23 +42,23 @@ for i=1:3
     Status = ones(N,1);
     Status(ind) = 2;
     if(i==1)
-        t1=title('No immunity','interpreter','latex','fontsize',14);
+        t1=title('No immunity','fontname',font,'fontsize',14,'fontweight','normal');
     elseif(i==2)
         rand(offset1,1);
-        t1=title('Below threshold','interpreter','latex','fontsize',14);
+        t1=title('Below threshold','fontname',font,'fontsize',14,'fontweight','normal');
         list = randperm(N);
         list = list(1:ceil(0.4*N));
         list(list==ind)=[];
         Status(list)=3;
     elseif(i==3)
         rand(offset2,1); 
-        t1=title('Above threshold','interpreter','latex','fontsize',14);
+        t1=title('Above threshold','fontname',font,'fontsize',14,'fontweight','normal');
         list = randperm(N);
         list = list(1:ceil(0.8*N));
         list(list==ind)=[];
         Status(list)=3;
     end
-    text(-0.04,1.1,labs{i},'interpreter','latex','fontsize',14);
+    text(-0.04,1.1,labs{i},'fontname',font,'fontsize',14);
     temp = get(t1,'position');
     temp(2) = 1.05;
     set(t1,'position',temp);
